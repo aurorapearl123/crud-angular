@@ -1,0 +1,68 @@
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+  <input
+    type="hidden"
+    name="patientID"
+    #patientID="ngModel"
+    [(ngModel)]="service.formData.patientID"
+  />
+  <div class="form-group">
+    <label>FIRST NAME</label>
+    <input
+      name="firstName"
+      #firstName="ngModel"
+      [(ngModel)]="service.formData.firstName"
+      class="form-control"
+      required
+    />
+    <div
+      class="validation-error"
+      *ngIf="firstName.invalid && firstName.touched"
+    >
+      First Name is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>MIDDLE NAME</label>
+    <input
+      name="middleName"
+      #middleName="ngModel"
+      [(ngModel)]="service.formData.middleName"
+      class="form-control"
+      required
+    />
+    <div
+      class="validation-error"
+      *ngIf="middleName.invalid && middleName.touched"
+    >
+      Middle Name is required.
+    </div>
+
+    <div class="form-group">
+      <label>LAST NAME</label>
+      <input
+        name="lastName"
+        #lastName="ngModel"
+        [(ngModel)]="service.formData.lastName"
+        class="form-control"
+        required
+      />
+      <div
+        class="validation-error"
+        *ngIf="lastName.invalid && lastName.touched"
+      >
+        Last Name is required.
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button
+      type="submit"
+      [disabled]="form.invalid"
+      class="btn btn-lg btn-block"
+    >
+      SUBMIT
+    </button>
+  </div>
+</form>

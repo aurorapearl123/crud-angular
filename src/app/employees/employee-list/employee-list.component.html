@@ -1,0 +1,15 @@
+<table class="table table-hover">
+  <tr *ngFor="let patient of service.list">
+    <td (click)="updatePatient(patient)">{{ patient.firstName }}</td>
+    <td (click)="updatePatient(patient)">{{ patient.middleName }}</td>
+    <td (click)="updatePatient(patient)">{{ patient.lastName }}</td>
+    <td>
+      <button
+        class="btn btn-sm btn-outline-danger"
+        (click)="onDelete(patient.patientID)"
+      >
+        X
+      </button>
+    </td>
+  </tr>
+</table>
