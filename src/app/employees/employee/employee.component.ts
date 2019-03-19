@@ -3,6 +3,8 @@ import { EmployeeService } from "src/app/shared/employee.service";
 import { NgForm } from "@angular/forms";
 import { from } from "rxjs";
 //import { ToastrService } from "ngx-toastr";
+import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { ChangeEvent } from "@ckeditor/ckeditor5-angular/ckeditor.component";
 
 @Component({
   selector: "app-employee",
@@ -10,6 +12,10 @@ import { from } from "rxjs";
   styleUrls: ["./employee.component.css"]
 })
 export class EmployeeComponent implements OnInit {
+  //data for ckeditor
+  public Editor = ClassicEditor;
+  // //default value for cg editor
+
   //after import this emploueeservice make sure to add to appmodule to provider
   //then make a from ui
   //add the toastr service
@@ -18,7 +24,6 @@ export class EmployeeComponent implements OnInit {
   ngOnInit() {
     //next initialize form
     this.resetForm();
-    //get all patients
   }
 
   //we need this function to our form
@@ -29,15 +34,18 @@ export class EmployeeComponent implements OnInit {
       patientID: null,
       firstName: "",
       middleName: "",
-      lastName: ""
+      lastName: "",
+      comment: ""
     };
+
+    //reset ckeditor
+    //this.editorData = "";
   }
 
   //click event from html
   onSubmit(form: NgForm) {
     if (form.value.patientID == null) {
       this.insetRecord(form);
-      console.log(form.value);
     } else {
       this.updateRecord(form);
     }
@@ -46,8 +54,6 @@ export class EmployeeComponent implements OnInit {
   insetRecord(form: NgForm) {
     console.log(form);
     this.service.postPatient(form.value).subscribe(response => {
-      console.log("the response");
-      console.log(response);
       //reset the form
       this.resetForm(form);
       //call to refresh the data
@@ -57,9 +63,14 @@ export class EmployeeComponent implements OnInit {
   //update record
   updateRecord(form: NgForm) {
     this.service.updateRecord(form.value).subscribe(response => {
-      console.log("update the record");
       this.resetForm(form);
       this.service.getPatients();
     });
+  }
+
+  //onchange function for ckeditor
+  public onChange({ editor }: ChangeEvent) {
+    const data = editor.getData();
+    //this.service.editorData = data;
   }
 }

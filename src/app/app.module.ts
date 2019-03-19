@@ -12,6 +12,7 @@ import { EmployeesComponent } from "./employees/employees.component";
 import { EmployeeComponent } from "./employees/employee/employee.component";
 import { EmployeeListComponent } from "./employees/employee-list/employee-list.component";
 import { EmployeeService } from "./shared/employee.service";
+import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { EmployeeService } from "./shared/employee.service";
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CKEditorModule
     //ToastrModule
   ],
   providers: [EmployeeService],

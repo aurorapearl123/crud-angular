@@ -5,6 +5,7 @@
     #patientID="ngModel"
     [(ngModel)]="service.formData.patientID"
   />
+
   <div class="form-group">
     <label>FIRST NAME</label>
     <input
@@ -55,6 +56,14 @@
       </div>
     </div>
   </div>
+  <hr />
+  <ckeditor
+    [(ngModel)]="service.model.editorData"
+    [editor]="Editor"
+    name="comment"
+  ></ckeditor>
+  <hr />
+  <br />
 
   <div class="form-group">
     <button
