@@ -18,10 +18,12 @@ export class EmployeeListComponent implements OnInit {
 
   //update the employee click event
   updatePatient(patient: Employee) {
+    console.log("you click me there");
     //call the form varialble inside the service
     //to change not realtime change
     //this.service.formData = patient;
     this.service.formData = Object.assign({}, patient);
+    this.service.model.editorData = patient.comment;
   }
 
   onDelete(id: number) {
