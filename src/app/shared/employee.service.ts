@@ -60,4 +60,13 @@ export class EmployeeService {
   deleteRecord(id: number) {
     return this.http.delete(this.rootURL + "patient-delete/" + id);
   }
+
+  uploadImage(image: any) {
+    const file = new FormData();
+    file.append("userFile", image);
+    return this.http.post(
+      "http://localhost/project/special/kitrol/api/upload-image",
+      file
+    );
+  }
 }

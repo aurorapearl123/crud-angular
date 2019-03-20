@@ -61,6 +61,7 @@
     [(ngModel)]="service.model.editorData"
     [editor]="Editor"
     name="comment"
+    [config]="ckconfig"
   ></ckeditor>
   <hr />
   <br />
@@ -75,3 +76,8 @@
     </button>
   </div>
 </form>
+<div class="form-group">
+  <button class="btn btn-lg btn-block" (click)="clearFrom($event)">
+    CLEAR
+  </button>
+</div>

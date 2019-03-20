@@ -5,6 +5,7 @@ import { from } from "rxjs";
 //import { ToastrService } from "ngx-toastr";
 import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { ChangeEvent } from "@ckeditor/ckeditor5-angular/ckeditor.component";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-employee",
@@ -15,6 +16,11 @@ export class EmployeeComponent implements OnInit {
   //data for ckeditor
   public Editor = ClassicEditor;
   // //default value for cg editor
+
+  ckconfig = {
+    // include any other configuration you want
+    extraPlugins: [this.TheUploadAdapterPlugin]
+  };
 
   //after import this emploueeservice make sure to add to appmodule to provider
   //then make a from ui
@@ -72,5 +78,71 @@ export class EmployeeComponent implements OnInit {
   public onChange({ editor }: ChangeEvent) {
     const data = editor.getData();
     //this.service.editorData = data;
+  }
+
+  public clearFrom(event: Event) {
+    console.log("hello clear");
+    this.resetForm();
+
+    //console.log(event);
+  }
+
+  TheUploadAdapterPlugin(Editor) {
+    console.log("TheUploadAdapterPlugin called");
+    Editor.plugins.get("FileRepository").createUploadAdapter = loader => {
+      return new UploadAdapter(
+        loader,
+        "http://localhost/project/special/kitrol/api/upload-image"
+      );
+    };
+  }
+}
+
+class UploadAdapter {
+  loader; // your adapter communicates to CKEditor through this
+  url;
+  constructor(loader, url) {
+    this.loader = loader;
+    this.url = url;
+    console.log("Upload Adapter Constructor", this.loader, this.url);
+  }
+
+  upload() {
+    // const data = new FormData();
+    // data.append("upload", this.loader.file);
+
+    // return this.loader.file.then(
+    //   file =>
+    //     new Promise((resolve, reject) => {
+    //       console.log("THE FILE");
+    //       console.log(file);
+    //     })
+    // );
+
+    // const xhr = new XMLHttpRequest();
+    // xhr.open(
+    //   "POST",
+    //   '"http://localhost/project/special/kitrol/api/upload-image',
+    //   true
+    // );
+    // //xhr.responseType = "json";
+
+    // const data = new FormData();
+
+    // data.append("userFile", this.loader.file);
+    // xhr.send(data);
+
+    return new Promise((resolve, reject) => {
+      console.log("UploadAdapter upload called", this.loader, this.url);
+      console.log("the file we got was", this.loader.file);
+      resolve({
+        default:
+          "http://localhost/project/special/kitrol/assets/img/uploads/15044671_1248176508586852_109767310_o.jpg"
+      });
+    });
+  }
+
+  abort() {
+    console.log("UploadAdapter abort");
   }
 }
