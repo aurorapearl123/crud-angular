@@ -61,7 +61,7 @@
     [(ngModel)]="service.model.editorData"
     [editor]="Editor"
     name="comment"
-    [config]="ckconfig"
+    (ready)="onReady($event)"
   ></ckeditor>
   <hr />
   <br />
