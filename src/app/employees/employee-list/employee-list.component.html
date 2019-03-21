@@ -1,4 +1,4 @@
-<table class="table table-hover">
+<!-- <table class="table table-hover">
   <tr *ngFor="let patient of service.list">
     <td (click)="updatePatient(patient)">{{ patient.firstName }}</td>
     <td (click)="updatePatient(patient)">{{ patient.middleName }}</td>
@@ -12,4 +12,100 @@
       </button>
     </td>
   </tr>
-</table>
+</table> -->
+
+<form>
+  <!-- <div class="form-group form-inline">
+    Full text search:
+    <input
+      class="form-control ml-2"
+      type="text"
+      name="searchTerm"
+      [(ngModel)]="service.searchTerm"
+    />
+    <span class="ml-3" *ngIf="(service.loading$ | async)">Loading...</span>
+  </div> -->
+  <div class="form-group form-inline">
+    <a href="#" class="btn btn-info btn-lg" (click)="toPDf()">
+      <span class="glyphicon glyphicon-file"></span> PDF
+    </a>
+  </div>
+
+  <table class="table table-striped" id="content">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" sortable="firstName" (sort)="onSort($event)">
+          Last name
+        </th>
+        <th scope="col" sortable="middleName" (sort)="onSort($event)">
+          Middle name
+        </th>
+        <th scope="col" sortable="lastName" (sort)="onSort($event)">
+          Last name
+        </th>
+        <th scope="col">
+          Option
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let patient of service.list">
+        <th scope="row">{{ patient.patientID }}</th>
+        <td>
+          <ngb-highlight
+            [result]="patient.firstName"
+            [term]="service.searchTerm"
+          ></ngb-highlight>
+        </td>
+        <td>
+          <ngb-highlight
+            [result]="patient.middleName"
+            [term]="service.searchTerm"
+          ></ngb-highlight>
+        </td>
+        <td>
+          <ngb-highlight
+            [result]="patient.lastName"
+            [term]="service.searchTerm"
+          ></ngb-highlight>
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            (click)="updatePatient(patient)"
+          >
+            Edit
+          </button>
+          <button
+            class="btn btn-sm btn-outline-danger"
+            (click)="onDelete(patient.patientID)"
+          >
+            X
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- <div class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [collectionSize]="total$ | async"
+      [(page)]="service.page"
+      [pageSize]="service.pageSize"
+    >
+    </ngb-pagination>
+
+    <select
+      class="custom-select"
+      style="width: auto"
+      name="pageSize"
+      [(ngModel)]="service.pageSize"
+    >
+      <option [ngValue]="2">2 items per page</option>
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+    </select>
+  </div> -->
+</form>

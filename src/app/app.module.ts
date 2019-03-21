@@ -5,6 +5,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 //add the ng-toast to angular json style
 //import { ToastrModule } from "ngx-toastr";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -27,7 +28,8 @@ import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    CKEditorModule
+    CKEditorModule,
+    NgbModule
     //ToastrModule
   ],
   providers: [EmployeeService],
