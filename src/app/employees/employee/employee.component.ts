@@ -58,6 +58,8 @@ export class EmployeeComponent implements OnInit {
       this.resetForm(form);
       //call to refresh the data
       this.service.getPatients();
+      //call to refresh the data in datatable
+      this.service.getPatientsDatatable();
     });
   }
   //update record
@@ -65,6 +67,8 @@ export class EmployeeComponent implements OnInit {
     this.service.updateRecord(form.value).subscribe(response => {
       this.resetForm(form);
       this.service.getPatients();
+      //call to refresh the data in datatable
+      this.service.getPatientsDatatable();
     });
   }
 

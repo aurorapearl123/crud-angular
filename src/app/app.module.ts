@@ -1,3 +1,4 @@
+import "hammerjs";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
@@ -14,13 +15,53 @@ import { EmployeeComponent } from "./employees/employee/employee.component";
 import { EmployeeListComponent } from "./employees/employee-list/employee-list.component";
 import { EmployeeService } from "./shared/employee.service";
 import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
+import { TableOverviewExampleComponent } from "./datatable/table-overview-example/table-overview-example.component";
+
+import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatStepperModule,
+  MatFormFieldModule
+} from "@angular/material";
+
+import { CdkTableModule } from "@angular/cdk/table";
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesComponent,
     EmployeeComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    TableOverviewExampleComponent
   ],
   imports: [
     BrowserModule,
@@ -29,10 +70,59 @@ import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
     HttpClientModule,
     BrowserAnimationsModule,
     CKEditorModule,
-    NgbModule
+    NgbModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+
+    HttpClientModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatInputModule,
+    MatIconModule,
+    MatSortModule
     //ToastrModule
   ],
   providers: [EmployeeService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    CdkTableModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatFormFieldModule
+  ]
 })
 export class AppModule {}
+
+platformBrowserDynamic().bootstrapModule(AppModule);
