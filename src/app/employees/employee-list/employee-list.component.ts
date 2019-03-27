@@ -3,7 +3,10 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
-  ElementRef
+  ElementRef,
+  Input,
+  EventEmitter,
+  Output
 } from "@angular/core";
 import { EmployeeService } from "src/app/shared/employee.service";
 import { Employee } from "src/app/shared/employee.model";
@@ -20,6 +23,12 @@ import "jspdf-autotable";
 })
 export class EmployeeListComponent implements OnInit {
   //@ViewChildren("content") content: ElementRef;
+  //get the parent data
+  //@Input() public parentData;
+  //add alias
+  @Input("parentData") public name;
+  //send data to parent use eventEmitter
+  @Output() public childEvent = new EventEmitter();
   page = 4;
   //to get the service import it to contructor
   constructor(private service: EmployeeService) {}
@@ -70,5 +79,9 @@ export class EmployeeListComponent implements OnInit {
     doc.text(5, 5, "List of all patients.");
     // Save the PDF
     doc.save("Patient.pdf");
+  }
+
+  onSend() {
+    this.childEvent.emit("Hey Tarzan");
   }
 }
