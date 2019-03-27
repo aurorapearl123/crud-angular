@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { EmployeeService } from "src/app/shared/employee.service";
 import { NgForm } from "@angular/forms";
 import { from } from "rxjs";
@@ -58,6 +58,8 @@ export class EmployeeComponent implements OnInit {
       this.resetForm(form);
       //call to refresh the data
       this.service.getPatients();
+      //call to refresh the data in datatable
+      this.service.getPatientsDatatable();
     });
   }
   //update record
@@ -65,6 +67,8 @@ export class EmployeeComponent implements OnInit {
     this.service.updateRecord(form.value).subscribe(response => {
       this.resetForm(form);
       this.service.getPatients();
+      //call to refresh the data in datatable
+      this.service.getPatientsDatatable();
     });
   }
 

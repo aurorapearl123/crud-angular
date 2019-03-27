@@ -1,5 +1,7 @@
 <div class="jumbotron">
-  <h1 class="diplay-4 text-center">Patient register</h1>
+  <h1 class="diplay-4 text-center">
+    Patient register | The message {{ message }}
+  </h1>
   <hr />
   <div class="row">
     <div class="col-md-5">
@@ -7,7 +9,15 @@
     </div>
 
     <div class="col-md-7">
-      <app-employee-list></app-employee-list>
+      <app-employee-list
+        (childEvent)="message = $event"
+        [parentData]="name"
+      ></app-employee-list>
+      <!-- <app-table-overview-example></app-table-overview-example> -->
     </div>
   </div>
+
+  <!-- <div class="col-md-5">
+    <app-table-overview-example></app-table-overview-example>
+  </div> -->
 </div>

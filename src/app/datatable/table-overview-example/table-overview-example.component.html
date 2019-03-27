@@ -1,0 +1,111 @@
+<br />
+<br />
+
+<hr />
+<div class="form-group form-inline">
+  <a href="#" class="btn btn-info btn-lg" (click)="toPDf()">
+    <span class="glyphicon glyphicon-file"></span> PDF
+  </a>
+</div>
+
+<div class="search-div">
+  <mat-form-field class="search-form-field" floatLabel="never">
+    <input
+      matInput
+      [(ngModel)]="searchKey"
+      placeholder="Filter"
+      autocomplete="off"
+      (keyup)="applyFilter()"
+    />
+    <button
+      mat-button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      *ngIf="searchKey"
+      (click)="onSearchClear()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="listData" matSort>
+    <!-- add container for data firstname -->
+    <ng-container matColumnDef="FirstName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >FirstName</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element">{{ element.firstName }}</mat-cell>
+    </ng-container>
+    <!-- add container for data Middlename -->
+    <ng-container matColumnDef="MiddleName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >MiddleName</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element">{{ element.middleName }}</mat-cell>
+    </ng-container>
+    <!-- add container for data lastName -->
+    <ng-container matColumnDef="LastName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >LastName</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element">{{ element.lastName }}</mat-cell>
+    </ng-container>
+    <!-- ng action for delete and edit -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Options</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <!-- <button mat-icon-button>Edit</button> -->
+        <button
+          type="button"
+          class="btn btn-secondary btn-sm"
+          (click)="updatePatient(row)"
+        >
+          Edit
+        </button>
+        <button
+          class="btn btn-sm btn-outline-danger"
+          (click)="onDelete(row.patientID)"
+        >
+          X
+        </button>
+        <!-- <button mat-icon-button><mat-icon>lunch</mat-icon></button>
+        <button mat-icon-button color="warn">
+          <mat-icon>delete_outline</mat-icon>
+        </button> -->
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <!-- display none data inseide the container if no data -->
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Nodata data...
+      </mat-footer-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    <!-- add loader for fetching data -->
+    <mat-footer-row
+      *matFooterRowDef="['loading']"
+      [ngClass]="{ hide: listData != null }"
+    ></mat-footer-row>
+    <!-- add to display if there's no data -->
+    <mat-footer-row
+      *matFooterRowDef="['noData']"
+      [ngClass]="{ hide: !(listData != null && listData.data.length == 0) }"
+    ></mat-footer-row>
+  </mat-table>
+  <!-- add paginator -->
+  <!-- add shofirtlatbutton directive -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    [pageSize]="5"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+</div>

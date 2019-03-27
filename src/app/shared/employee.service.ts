@@ -45,6 +45,10 @@ export class EmployeeService {
       });
   }
 
+  getPatientsDatatable() {
+    return this.http.get(this.rootURL + "patient-all");
+  }
+
   updateRecord(formData: Employee) {
     let body = new FormData();
     body.append("firstName", formData.firstName);
