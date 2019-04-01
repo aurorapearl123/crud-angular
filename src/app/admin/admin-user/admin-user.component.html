@@ -1,0 +1,64 @@
+<table class="table table-striped" id="content">
+  <thead>
+    <tr>
+      <th>UserName</th>
+      <th>FirstName</th>
+      <th>LastName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of service.list">
+      <td (click)="viewRole(user)">{{ user.userName }}</td>
+      <td>{{ user.firstName }}</td>
+      <td>{{ user.lastName }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<button class="btn btn-primary" (click)="logout()">LOGOUT</button>
+
+<div *ngIf="userID">
+  <div style="text-align:center">
+    <h1>{{ title }}! User: {{ userName }}</h1>
+  </div>
+  <div class="container">
+    <div class="text-center mt-5">
+      <div class="row">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <input
+                type="checkbox"
+                [(ngModel)]="masterSelected"
+                name="list_name"
+                value="m1"
+                (change)="checkUncheckAll()"
+              />
+              <strong>Select/ Unselect All</strong>
+            </li>
+          </ul>
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let item of checklist">
+              <input
+                type="checkbox"
+                [(ngModel)]="item.isSelected"
+                name="list_name"
+                value="{{ item.id }}"
+                (change)="isAllSelected()"
+              />
+              {{ item.value }}
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <div *ngIf="checkedList">
+            <!-- <code>{{ checkedList }}</code> -->
+            <button class="btn btn-primary" (click)="updateModule()">
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

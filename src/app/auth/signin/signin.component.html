@@ -1,0 +1,34 @@
+<br />
+<br />
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <form [formGroup]="service.form" (submit)="onSignin()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" formControlName="username" class="form-control" />
+        <div
+          class="validation-error"
+          *ngIf="service.form.controls['username'].error?.required"
+        >
+          fdsfadfa
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          class="form-control"
+        />
+        <div
+          class="validation-error"
+          *ngIf="service.form.controls['password'].error?.required"
+        >
+          fdsfadfa
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">SIGIN</button>
+    </form>
+    <!-- <button class="btn btn-info" (click)="signup()">SIGNUP</button> -->
+  </div>
+</div>

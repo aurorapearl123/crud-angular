@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <div class="container">
+      <div class="logo">Create a new account!</div>
+      <div class="form-group">
+        <form
+          #myform="ngForm"
+          (ngSubmit)="register(myform)"
+          class="form form-register"
+        >
+          <div class="form-group">
+            <label class="user" for="register-username"
+              ><span class="hidden">Username</span></label
+            >
+            <input
+              name="username"
+              id="register-username"
+              type="email"
+              class="form-control"
+              placeholder="username"
+              ngModel
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="lock" for="register-password"
+              ><span class="hidden">Password</span></label
+            >
+            <input
+              name="password"
+              id="register-password"
+              type="password"
+              class="form-control"
+              placeholder="Password"
+              ngModel
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="user" for="firstname"
+              ><span class="hidden">Firstname</span></label
+            >
+            <input
+              name="firstname"
+              id="firstname"
+              type="text"
+              class="form-control"
+              placeholder="Firstname"
+              ngModel
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="user" for="middlename"
+              ><span class="hidden">Middlename</span></label
+            >
+            <input
+              name="middlename"
+              id="middlename"
+              type="text"
+              class="form-control"
+              placeholder="Middlename"
+              ngModel
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="user" for="lastname"
+              ><span class="hidden">Lastname</span></label
+            >
+            <input
+              name="lastname"
+              id="lastname"
+              type="text"
+              class="form-control"
+              placeholder="Lastname"
+              ngModel
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <button class="btn btn-primary" type="submit">REGISTER</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

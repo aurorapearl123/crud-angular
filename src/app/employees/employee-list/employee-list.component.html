@@ -29,6 +29,7 @@
     <a href="#" class="btn btn-info btn-lg" (click)="toPDf()">
       <span class="glyphicon glyphicon-file"></span> PDF
     </a>
+    <button class="btn btn-primary" (click)="logout()">LOGOUT</button>
   </div>
 
   <table class="table table-striped" id="content">
@@ -70,20 +71,25 @@
             [term]="service.searchTerm"
           ></ngb-highlight>
         </td>
+
         <td>
-          <button
-            type="button"
-            class="btn btn-secondary btn-sm"
-            (click)="updatePatient(patient)"
-          >
-            Edit
-          </button>
-          <button
-            class="btn btn-sm btn-outline-danger"
-            (click)="onDelete(patient.patientID)"
-          >
-            X
-          </button>
+          <ng-container *ngIf="mapToSearch.edit === '2'">
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm"
+              (click)="updatePatient(patient)"
+            >
+              Edit
+            </button>
+          </ng-container>
+          <ng-container *ngIf="mapToSearch.delete === '4'">
+            <button
+              class="btn btn-sm btn-outline-danger"
+              (click)="onDelete(patient.patientID)"
+            >
+              X
+            </button>
+          </ng-container>
         </td>
       </tr>
     </tbody>

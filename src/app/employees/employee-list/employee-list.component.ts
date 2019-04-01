@@ -15,6 +15,9 @@ import { Observable } from "rxjs";
 
 import * as jsPDF from "jspdf";
 import "jspdf-autotable";
+import { Router } from "@angular/router";
+import { routerNgProbeToken } from "@angular/router/src/router_module";
+import { UsersService } from "src/app/shared/users.service";
 
 @Component({
   selector: "app-employee-list",
@@ -31,11 +34,49 @@ export class EmployeeListComponent implements OnInit {
   @Output() public childEvent = new EventEmitter();
   page = 4;
   //to get the service import it to contructor
-  constructor(private service: EmployeeService) {}
+  //this is a list for mudule
+
+  mapToSearch = {
+    add: "",
+    edit: "",
+    view: "",
+    delete: ""
+  };
+
+  list: object[];
+  constructor(
+    private service: EmployeeService,
+    private router: Router,
+    private userService: UsersService
+  ) {}
 
   //now in thise nghooks call the get all patients in service
   ngOnInit() {
     this.service.getPatients();
+
+    const userID = localStorage.getItem("userID");
+
+    this.userService.getUserRole(userID).subscribe(response => {
+      const roleName = response["data"][0].roleName;
+      if (roleName.indexOf("patient") > -1) {
+        const role = roleName.replace("patient", "");
+        var list_roles = JSON.parse(role);
+
+        for (var k in list_roles) {
+          if (list_roles[k] == "1") {
+            this.mapToSearch.add = "1";
+          } else if (list_roles[k] == "2") {
+            this.mapToSearch.edit = "2";
+          } else if (list_roles[k] == "3") {
+            this.mapToSearch.view = "3";
+          } else if (list_roles[k] == "4") {
+            this.mapToSearch.delete = "4";
+          }
+        }
+        //this.mapToSearch.edit = this.list[0] + "";
+        // this.mapToSearch.delete = this.list[1] + "";
+      }
+    });
   }
 
   //update the employee click event
@@ -83,5 +124,10 @@ export class EmployeeListComponent implements OnInit {
 
   onSend() {
     this.childEvent.emit("Hey Tarzan");
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(["signin"]);
   }
 }

@@ -1,8 +1,8 @@
 import "hammerjs";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 //add the ng-toast to angular json style
 //import { ToastrModule } from "ngx-toastr";
@@ -54,6 +54,12 @@ import {
 } from "@angular/material";
 
 import { CdkTableModule } from "@angular/cdk/table";
+import { SignupComponent } from "./auth/signup/signup.component";
+import { SigninComponent } from "./auth/signin/signin.component";
+import { AuthGuardService } from "./auth/auth-guard.service";
+import { AuthService } from "./auth/auth.service";
+import { AdminUserComponent } from "./admin/admin-user/admin-user.component";
+import { AuthInterceptor } from "./shared/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -61,7 +67,10 @@ import { CdkTableModule } from "@angular/cdk/table";
     EmployeesComponent,
     EmployeeComponent,
     EmployeeListComponent,
-    TableOverviewExampleComponent
+    TableOverviewExampleComponent,
+    SignupComponent,
+    SigninComponent,
+    AdminUserComponent
   ],
   imports: [
     BrowserModule,
@@ -82,10 +91,20 @@ import { CdkTableModule } from "@angular/cdk/table";
     MatPaginatorModule,
     MatInputModule,
     MatIconModule,
-    MatSortModule
+    MatSortModule,
+    ReactiveFormsModule
     //ToastrModule
   ],
-  providers: [EmployeeService],
+  providers: [
+    EmployeeService,
+    AuthGuardService,
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
   exports: [
     CdkTableModule,
